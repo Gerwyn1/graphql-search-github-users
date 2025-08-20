@@ -18,3 +18,23 @@ export const calculateMostForkedRepos = (
     .slice(0, 5);
   return forkedRepos;
 };
+
+export const calculateMostStarredRepo = (
+  repositories: Repository[]
+): { repo: string; stars: number }[] => {
+  if (repositories.length === 0) {
+    return [];
+  }
+
+  const starredRepos = repositories
+    .map((repo) => {
+      return {
+        repo: repo.name,
+        stars: repo.stargazerCount,
+      };
+    })
+    .sort((a, b) => b.stars - a.stars)
+    .slice(0, 5);
+
+  return starredRepos;
+};
